@@ -1,7 +1,8 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const axios = require("axios");
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log("Servidor corriendo en puerto " + PORT);
+});
 
 const app = express();
 app.use(cors());

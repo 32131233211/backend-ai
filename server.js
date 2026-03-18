@@ -20,7 +20,7 @@ app.post("/chat", async (req, res) => {
   },
   {
     headers: {
-      "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+      "Authorization": "Bearer sk-xxxxxxxxxxxx"
     }
   }
 );

@@ -1,10 +1,10 @@
-const PORT = process.env.PORT || 3001;
-
-app.listen(PORT, () => {
-  console.log("Servidor corriendo en puerto " + PORT);
-});
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
@@ -29,11 +29,14 @@ app.post("/chat", async (req, res) => {
     res.json({ reply });
 
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Error");
+    console.error("ERROR BACKEND:", error.response?.data || error.message);
+    res.status(500).json({ error: "Error en el servidor" });
   }
 });
 
-app.listen(3001, () => {
-  console.log("Servidor corriendo en puerto 3001");
+// ✅ SOLO UN listen
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+  console.log("Servidor corriendo en puerto " + PORT);
 });

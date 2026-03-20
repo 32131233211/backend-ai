@@ -17,11 +17,11 @@ app.post("/chat", async (req, res) => {
 
   try {
     const response = await axios.post(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        model: "openchat/openchat-7b:free", // GRATIS
-        messages: [{ role: "user", content: message }]
-      },
+  "https://openrouter.ai/api/v1/chat/completions",
+  {
+    model: "mistralai/mistral-7b-instruct:free",
+    messages: [{ role: "user", content: message }]
+  },
       {
         headers: {
           "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,

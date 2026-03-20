@@ -8,7 +8,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Ruta de prueba
 app.get("/", (req, res) => {
   res.send("Backend funcionando 🚀");
 });
@@ -17,23 +16,23 @@ app.post("/chat", async (req, res) => {
   const { message } = req.body;
 
   try {
-    console.log("API KEY:", process.env.OPENAI_API_KEY ? "OK" : "NO CARGADA");
-
     const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
+      "https://openrouter.ai/api/v1/chat/completions",
       {
-        model: "gpt-4o-mini",
+        model: "openchat/openchat-7b:free", // GRATIS
         messages: [{ role: "user", content: message }]
       },
       {
         headers: {
-          "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-          "Content-Type": "application/json"
+          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "HTTP-Referer": "http://localhost:3000",
+          "X-Title": "Mi App IA"
         }
       }
     );
 
     const reply = response.data.choices[0].message.content;
+
     res.json({ reply });
 
   } catch (error) {
